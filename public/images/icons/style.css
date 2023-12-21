@@ -1,0 +1,54 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?5fvjac');
+  src:  url('fonts/icomoon.eot?5fvjac#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?5fvjac') format('truetype'),
+    url('fonts/icomoon.woff?5fvjac') format('woff'),
+    url('fonts/icomoon.svg?5fvjac#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-comment:before {
+  content: "\e96d";
+}
+.icon-user:before {
+  content: "\e971";
+}
+.icon-search:before {
+  content: "\e986";
+}
+.icon-key:before {
+  content: "\e98d";
+}
+.icon-logo:before {
+  content: "\e999";
+}
+.icon-mug:before {
+  content: "\e9a2";
+}
+.icon-love:before {
+  content: "\e9da";
+}
+.icon-exit:before {
+  content: "\ea14";
+}
+.icon-ctrl:before {
+  content: "\ea50";
+}
