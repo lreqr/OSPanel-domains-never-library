@@ -19,24 +19,33 @@ use App\Http\Controllers\ApiAnimeController;
 
 Route::get('/', [ReleasesController::class, 'index'])->name('release.index');
 
-Route::prefix('release')->group(function (){
+Route::prefix('release')->group(function () {
     Route::get('/events/{event}-{year}', [ReleasesController::class, 'seasonEvent'])->name('release.seasonEvents');
     Route::get('/{id}-{slug}', [ReleasesController::class, 'show'])->name('release.show');
     Route::get('/{genre}', [ReleasesController::class, 'filterByGenre'])->name('release.filterByGenre');
 });
 
 //User
-Route::prefix('user')->group(function (){
-   Route::get('/create', [UserController::class, 'create'])->name('user.create');
-   Route::post('/store', [UserController::class, 'store'])->name('user.store');
-   Route::get('/login', [UserController::class, 'login'])->name('user.login');
-   Route::post('/authenticate', [UserController::class, 'authenticate'])->name('user.authenticate');
-   Route::get('/profile', [UserController::class, 'profile'])->name('user.profile')->middleware('auth');
-   Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
+Route::prefix('user')->group(function () {
+    //Show Create Page
+    Route::get('/create', [UserController::class, 'create'])->name('user.create');
+    //Store User
+    Route::post('/store', [UserController::class, 'store'])->name('user.store');
+    //Show Login Page
+    Route::get('/login', [UserController::class, 'login'])->name('user.login');
+    //Authenticate User
+    Route::post('/authenticate', [UserController::class, 'authenticate'])->name('user.authenticate');
+    //Show Profile
+    Route::get('/profile', [UserController::class, 'profile'])->name('user.profile')->middleware('auth');
+    //Logout User
+    Route::post('/logout', [UserController::class, 'logout'])->name('user.logout');
+    //Update Anime Status
+    Route::post('/{$animeId}/{$animeSlug}', [UserController::class, 'updateAnimeStatus'])->middleware('auth');
+
 });
 
 //API My Anime List
-Route::prefix('anime-list')->group(function (){
+Route::prefix('anime-list')->group(function () {
     Route::get('/send-request', [ApiAnimeController::class, 'sendRequestToAPI'])->name('send-request');
     Route::get('/get-token', [ApiAnimeController::class, 'getToken'])->name('get-token');
     Route::post('/get-anime/{token}', [ApiAnimeController::class, 'getAnime'])->name('get-anime');

@@ -5,9 +5,11 @@
         <div class="mega-dropdown-block">
             <div class="mega-dropdown-content">
                 <ul id="film" class="mega-dropdown-ul row">
-                    @foreach($genres as $genre)
-                        <li class="col-lg-2 col-md-3 col-sm-4"><a href="/release/{{$genre->title}}">{{$genre->title}}</a></li>
-                    @endforeach
+                    @if(isset($genres))
+                        @foreach($genres as $genre)
+                            <li class="col-lg-2 col-md-3 col-sm-4"><a href="/release/{{$genre->title}}">{{$genre->title}}</a></li>
+                        @endforeach
+                    @endif
                 </ul>
                 <div class="col-lg-12 mt-3 pb-3">
                     <div class="mega-search d-flex justify-content-center align-items-center">
@@ -19,9 +21,11 @@
                                 Любого жанра
                             </button>
                             <ul class="small-dropdown dropdown-menu">
-                                @foreach($genres as $genre)
-                                    <li><a href="?genre={{$genre->title}}">{{$genre->title}}</a></li>
-                                @endforeach
+                                @if(isset($genres))
+                                    @foreach($genres as $genre)
+                                        <li><a href="?genre={{$genre->title}}">{{$genre->title}}</a></li>
+                                    @endforeach
+                                @endif
                             </ul>
                         </div>
                         <div class="btn-group dropup mx-2">

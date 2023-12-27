@@ -21,7 +21,7 @@ class ReleasesController extends Controller
             ->paginate(16)
             ->appends(request()->query());
 
-        //                                           filterCarousel(мин Рейтинг, Год выпуска)
+                                                   //filterCarousel(мин Рейтинг, Год выпуска)
         $carousel = Release::with('genres')->filterCarousel(8, 2023)->get();
         $seasonEvents = SeasonEvent::all();
         return view('release.index', [

@@ -13,13 +13,15 @@
                     <!-- view-status -->
                     <div class="view-status text-uppercase text-center">
                         <div class="view-watching">
-                            <a class="fs-4" href="/">Смотрю</a>
+                            <a class="fs-4" href="" id="watchingButton">Смотрю</a>
                         </div>
+                        <input type="hidden" id="animeId" value="{{$release->id}}">
+                        <input type="hidden" id="animeSlug" value="{{$release->slug}}">
                         <div class="view-watched">
-                            <a class="fs-4" href="/">Просмотрено</a>
+                            <a class="fs-4" href="" id="watchedButton">Просмотрено</a>
                         </div>
                         <div class="view-planned">
-                            <a class="fs-4" href="/">Запланировано</a>
+                            <a class="fs-4" href="" id="plannedButton">Запланировано</a>
                         </div>
                     </div>
                     <!-- stars -->

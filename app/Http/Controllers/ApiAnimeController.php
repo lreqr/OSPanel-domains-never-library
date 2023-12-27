@@ -48,7 +48,6 @@ class ApiAnimeController extends Controller
 
     public function getAnime($token, Request $request)
     {
-
         //Season search
         if (\request('type') == 'season'){
             $formFields = $request->validate([
@@ -64,9 +63,6 @@ class ApiAnimeController extends Controller
             if ($response->successful()) {
                 $responseData = $response->json();
                 // Обработка успешного ответа
-                $request->session()->put('releases', $responseData);
-                $request->session()->put('token', $token);
-                $request->session()->put('type', $formFields['type']);
                 return view('api-animelist.anime-season', [
                     'releases' => $responseData,
                     'token' => $token,
@@ -94,9 +90,6 @@ class ApiAnimeController extends Controller
             if ($response->successful()) {
                 $responseData = $response->json();
                 // Обработка успешного ответа
-                $request->session()->put('releases', $responseData);
-                $request->session()->put('token', $token);
-                $request->session()->put('type', $formFields['type']);
                 return view('api-animelist.anime-season', [
                     'releases' => $responseData,
                     'token' => $token,
@@ -124,9 +117,6 @@ class ApiAnimeController extends Controller
             if ($response->successful()) {
                 $responseData = $response->json();
                 // Обработка успешного ответа
-                $request->session()->put('releases', $responseData);
-                $request->session()->put('token', $token);
-                $request->session()->put('type', $formFields['type']);
                 return view('api-animelist.anime-season', [
                     'releases' => $responseData,
                     'token' => $token,
@@ -149,12 +139,11 @@ class ApiAnimeController extends Controller
         ]);
         $response = Http::withHeaders([
             'Authorization' => "Bearer {$token}",
-        ])->get("https://api.myanimelist.net/v2/anime/{$formFields['animeId']}?fields=id,title,main_picture,alternative_titles,start_date,end_date,synopsis,mean,rank,popularity,num_list_users,num_scoring_users,nsfw,created_at,updated_at,media_type,status,genres,my_list_status,num_episodes,start_season,broadcast,source,average_episode_duration,rating,pictures,background,related_anime,related_manga,recommendations,studios,statistics");
+        ])->get("https://api.myanimelist.net/v2/anime/{$formFields['animeId']}?fields=id,title,main_picture,alternative_titles,start_date,end_date,synopsis,mean,rank,popularity,num_list_users,num_scoring_users,nsfw,created_at,updated_at,media_type,status,genres,my_list_status,num_episodes,start_season,broadcast,source,average_episode_duration,rating,pictures,background,related_anime,related_manga,recommendations,studios,statistics,videos");
 
         if ($response->successful()) {
             $responseData = $response->json();
             // Обработка успешного ответа
-//            dd($responseData);
             return view('api-animelist.anime-show',[
                 'release' => $responseData,
                 'token' => $token,
@@ -216,12 +205,18 @@ class ApiAnimeController extends Controller
             $releaseGenres[$i]['genre_id'] = intval($genresId[$i]);
         }
 
+        $result = [];
+        $genresResult = '';
+
         if (!Release::where('id', $formFields['id'])->exists()){
             Release::create($formFields);
+            $result['title'] = $formFields['title'];
+
         }
         foreach ($genres as $genre){
             if (!Genre::where('id', $genre['id'])->exists()){
                 Genre::create($genre);
+                $genresResult .= $genre['title'] . ', ';
             }
         }
         foreach ($releaseGenres as $releaseGenre){
@@ -229,7 +224,9 @@ class ApiAnimeController extends Controller
                 ReleaseGenre::create($releaseGenre);
             }
         }
-
-
+        return view('api-animelist.anime-after-fill-bd',[
+            'result' => $result,
+            'genres' => $genresResult,
+        ]);
     }
 }

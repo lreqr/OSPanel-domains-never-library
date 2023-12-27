@@ -1,11 +1,11 @@
 <x-layout>
 
-    <!-- carousel -->
+{{--    <!-- carousel -->--}}
     @include('partial.carousel', ['carousel' => $carousel])
-    <!-- season-events -->
+{{--    <!-- season-events -->--}}
     @include('partial.season-events', ['seasonEvents' => $seasonEvents])
 
-    @if($releases)
+    @if(isset($releases))
         <!-- filter-row -->
         @include('partial.filter-row', ['paddingTop' => 'pt-4'])
         <!-- anime-row -->

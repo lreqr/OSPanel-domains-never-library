@@ -45,7 +45,7 @@
             <!-- header navbar -->
             <nav class="header-nav navbar position-relative">
                 <div class="header-nav-wrapper container-fluid">
-                    <x-navbar :genres="$genres"/>
+                    <x-navbar :genres="$genres" />
                 </div>
             </nav>
         </div>

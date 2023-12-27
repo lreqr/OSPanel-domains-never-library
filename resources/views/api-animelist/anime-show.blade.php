@@ -163,7 +163,6 @@
                             <br>
                             <label for="slug">slug</label>
                             <input type="text" name="slug" id="slug" value="@php echo strtolower(str_replace(' ', '-', str_replace(':', '', str_replace('.', '', str_replace('(', '', str_replace(')', '', $release['title'])))))) @endphp">
-                            <input type="hidden" name="url">
                             <button type="submit">Send to fill DB</button>
                         </form>
                     </div>

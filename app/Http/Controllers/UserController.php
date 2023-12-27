@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    public function create()
+    public function create(): View
     {
         return view('user.create');
     }
@@ -28,7 +29,7 @@ class UserController extends Controller
 
         //Hash Password
         $formFields['password'] = bcrypt($formFields['password']);
-
+        $formFields['is_admin'] = 0;
         //Create user
         $user = User::create($formFields);
 
@@ -50,7 +51,7 @@ class UserController extends Controller
         ]);
 
         $remember = $request->has('remember_token');
-        
+
         if (auth()->attempt($formFields, $remember)){
             $request->session()->regenerate();
             return redirect(route('release.index'));
@@ -59,7 +60,7 @@ class UserController extends Controller
         return back()->withErrors(['email' => 'Неверный email или пароль'])->onlyInput('email');
     }
 
-    public function logout(Request $request)
+    public function logout(Request $request): RedirectResponse
     {
         auth()->logout();
 
@@ -75,5 +76,11 @@ class UserController extends Controller
         return \view('user.profile', [
             'user' => $user,
         ]);
+    }
+
+    public function updateAnimeStatus($animeId, $animeSlug, Request $request): Response
+    {
+        return response('Hello World', 200)
+            ->header('Content-Type', 'text/plain');
     }
 }
