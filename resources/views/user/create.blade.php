@@ -4,7 +4,7 @@
             <div class="heading text-center">
                 <h1>Sign up</h1>
             </div>
-            <form action="{{route('user.store')}}" method="POST">
+            <form action="{{route('user.store')}}" method="POST" >
                 @csrf
                 <div class="input-groups">
                     <div class="d-flex" style="width: 25%">
@@ -55,7 +55,7 @@
                 <div class="d-flex justify-content-center text-center">
                     <hr class=" " style="width: 25%">
                 </div>
-                <p class="mt-3">Already have an account? <a href="">Log in here.</a></p>
+                <p class="mt-3">Already have an account? <a href="{{ route('user.login') }}">Log in here.</a></p>
             </form>
 
         </div>

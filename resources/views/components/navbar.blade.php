@@ -50,9 +50,12 @@
             </div>
         </div>
     </li>
-    <li class="header-nav-links-li"><a href="{{route('release.filterByGenre', ['genre' => 'all'])}}">Новинки</a></li>
-    <li class="header-nav-links-li"><a href="">Анонсы</a></li>
-    <li class="header-nav-links-li" style="color: red;"><a href="http://never-library/anime-list/send-request">SEND REQUEST</a></li>
+    <li class="header-nav-links-li"><a href="{{route('release.filterByGenre', ['genre' => 'newest'])}}">Новинки</a></li>
+    @auth()
+        <li class="header-nav-links-li"><a href="http://never-library/anime-list/send-request">SEND REQUEST</a></li>
+        <li class="header-nav-links-li"><a href="{{route('admin.index')}}">Admin</a></li>
+    @endauth
+
 </ul>
 <form action="{{route('release.filterByGenre', ['genre' => 'all'])}}" method="GET" class="d-flex position-absolute">
 

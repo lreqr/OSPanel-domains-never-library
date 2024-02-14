@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
+class Video extends Model
 {
     use HasFactory;
 
-    public function release()
+    public function releases()
     {
-        return $this->belongsTo(Release::class, 'release_id');
+        return $this->belongsToMany(Release::class, 'release_videos', 'video_id', 'release_id');
     }
 }

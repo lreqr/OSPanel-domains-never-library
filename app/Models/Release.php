@@ -17,6 +17,8 @@ class Release extends Model
 
         if ($genreName == 'all'){
             return $query;
+        } elseif ($genreName == 'newest'){
+            return $query->orderBy('release_year', 'desc');
         } else{
             $query->whereHas('genres', function ($query) use ($genreName) {
                 $query->where('title', $genreName);
@@ -31,6 +33,7 @@ class Release extends Model
     {
         return $query->where('rating', '>', $minRating)
             ->where('release_year', '=', $minReleaseYear)
+            ->orWhere('release_year', '>', $minReleaseYear)
             ->orderBy('rating', 'desc')
             ->limit(14);
     }
@@ -69,7 +72,7 @@ class Release extends Model
                 ->orWhere('original_title', 'LIKE', "%{$search}%")
                 ->orWhere('release_year', 'LIKE', "%{$search}%")
                 ->orWhere('release_season', 'LIKE', "%{$search}%")
-                ->orWhere('description', 'LIKE', "%{$search}%")
+                ->orWhere('production_studio', 'LIKE', "%{$search}%")
                 ->orWhere('description', 'LIKE', "%{$search}%");
         }
 
@@ -94,14 +97,14 @@ class Release extends Model
         return $query;
     }
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class, 'release_id');
-    }
-
     public function genres()
     {
         return $this->belongsToMany(Genre::class, 'release_genres', 'release_id', 'genre_id');
+    }
+
+    public function videos()
+    {
+        return $this->belongsToMany(Video::class, 'release_videos', 'release_id', 'video_id');
     }
 
 

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Release;
+use App\Models\ReleaseUser;
 
 class User extends Authenticatable
 {
@@ -42,4 +44,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function releases()
+    {
+        return $this->belongsToMany(Release::class, 'release_users', 'user_id', 'release_id')
+            ->withPivot('type', 'rating');
+    }
+
+    public function scopeFilterByType($query, $type)
+    {
+        return $query->where('release_users.type', $type);
+    }
 }

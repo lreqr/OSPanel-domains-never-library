@@ -82,7 +82,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="inputSeasonLimit" class="form-label">Limit</label>
-                            <input type="number" class="form-control" id="inputSeasonLimit" name="limit" placeholder="Limit">
+                            <input type="number" class="form-control" id="inputSeasonLimit" name="limit" placeholder="Limit" value="0">
                         </div>
                         <div class="col-md-6 d-none">
                             <label for="type" class="form-label">Search type</label>
@@ -91,6 +91,66 @@
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary">Send</button>
                         </div>
+                    </form>
+                </div>
+                <div class="col-12" style="background: var(--bg-color)">
+                    <form method="POST" action="{{route('get-anime', ['token' => $token])}}" enctype="application/x-www-form-urlencoded" class="row g-3">
+                        @csrf
+                        <div class="col-12" style="text-align: center">
+                            <h1>Get 100 anime ranking</h1>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="ranking_type" class="form-label">Ranking type</label>
+                            <select id="ranking_type" class="form-select" name="ranking_type">
+                                <option selected>Top Anime...</option>
+                                <option>all</option>
+                                <option>airing</option>
+                                <option>upcoming</option>
+                                <option>tv</option>
+                                <option>ova</option>
+                                <option>movie</option>
+                                <option>special</option>
+                                <option>popularity</option>
+                                <option>special</option>
+                                <option>favorite</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputSeasonLimit" class="form-label">Limit</label>
+                            <input type="number" class="form-control" id="inputSeasonLimit" name="limit" placeholder="Limit" value="0">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="start" class="form-label">Start</label>
+                            <input type="number" class="form-control" id="start" name="start" placeholder="start" value="0">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="end" class="form-label">End</label>
+                            <input type="number" class="form-control" id="end" name="end" placeholder="end" value="0">
+                        </div>
+                        <div class="col-md-6 d-none">
+                            <label for="type" class="form-label">Search type</label>
+                            <input type="text" class="form-control" id="type" name="type" placeholder="ranking" value="ranking-100">
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12" style="background: var(--bg-color)">
+                    <form method="POST" action="{{route('get-anime', ['token' => $token])}}" enctype="application/x-www-form-urlencoded" class="row g-3">
+                    @csrf
+                        <div class="col-12" style="text-align: center">
+                            <h1>Update anime by ID</h1>
+                        </div>
+                        <div class="col-12">
+                            <label for="animeId">animeId</label>
+                            <input type="number" name="animeId" id="animeId">
+                        </div>
+                        <div class="col-md-6 d-none">
+                            <label for="type" class="form-label">Search type</label>
+                            <input type="text" class="form-control" id="type" name="type" placeholder="update" value="update">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send</button>
                     </form>
                 </div>
             </div>

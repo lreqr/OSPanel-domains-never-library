@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Genre;
 use App\Models\Release;
+use App\Models\ReleaseComment;
 use App\Models\ReleaseGenre;
+use App\Models\ReleaseUser;
 use App\Models\SeasonEvent;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -22,7 +24,7 @@ class ReleasesController extends Controller
             ->appends(request()->query());
 
                                                    //filterCarousel(мин Рейтинг, Год выпуска)
-        $carousel = Release::with('genres')->filterCarousel(8, 2023)->get();
+        $carousel = Release::with('genres')->filterCarousel(9, 2023)->get();
         $seasonEvents = SeasonEvent::all();
         return view('release.index', [
             'releases' => $releases,
@@ -34,10 +36,17 @@ class ReleasesController extends Controller
     public function show($id, $slug, Release $release): View
     {
         $release = $release->find($id);
+        if (auth()->user()){
+            $users = ReleaseUser::where('release_id', $id)->where('user_id', auth()->user()->id)->get()->all();
+        }
+        $comments = ReleaseComment::where('release_id', $id)->with('users')->get();
+//        dd($comments);
         return \view('release.show', [
             'release' => $release,
-            'comments' => $release->comments()->get(),
             'genres_release' => $release->genres()->get(),
+            'videos' => $release->videos()->get()->all(),
+            'users' => $users ?? null,
+            'comments' => $comments,
         ]);
     }
 

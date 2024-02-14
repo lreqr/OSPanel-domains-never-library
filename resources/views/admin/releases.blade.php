@@ -1,10 +1,4 @@
-<x-layout>
-
-    {{--    <!-- carousel -->--}}
-    @include('partial.carousel', ['carousel' => $carousel])
-    {{--    <!-- season-events -->--}}
-    @include('partial.season-events', ['seasonEvents' => $seasonEvents])
-
+<x-admin-layout>
     @if(isset($releases))
         <!-- filter-row -->
         @include('partial.filter-row', ['paddingTop' => 'pt-4'])
@@ -15,10 +9,10 @@
                 <div class="row">
                     @if($releases->all())
                         @foreach($releases as $release)
-                            <x-poster-wrapper :release="$release"/>
+                            <x-admin-poster-wrapper :release="$release"/>
                         @endforeach
                     @else
-                        <x-poster-wrapper :release="null"/>
+                        <x-admin-poster-wrapper :release="null"/>
                     @endif
 
 
@@ -40,5 +34,4 @@
             </div>
         </div>
     @endif
-
-</x-layout>
+</x-admin-layout>

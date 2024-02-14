@@ -1,6 +1,6 @@
 @if(isset($release))
     <div class="col-lg-3 col-md-4 col-sm-12 poster">
-        <a href="{{route('release.show', ['id' => $release->id, 'slug' => $release->slug])}}">
+        <a href="{{route('admin.show', ['id' => $release->id, 'slug' => $release->slug])}}">
             <div class="poster-img">
                 <span class="poster-rating">{{$release->rating}}</span>
                 <img src="@if($release->image_url)

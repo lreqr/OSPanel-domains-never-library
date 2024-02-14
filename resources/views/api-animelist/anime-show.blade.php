@@ -133,9 +133,9 @@
                             <label for="type"></label>
                             <input type="text" name="type" id="type" value="{{$release['media_type']}}">
                             <label for="release_year"></label>
-                            <input type="number" name="release_year" id="release_year" value="{{$release['start_season']['year']}}">
+                            <input type="number" name="release_year" id="release_year" value="{{$release['start_season']['year'] ?? 0}}">
                             <label for="release_season_slug"></label>
-                            <input type="text" name="release_season_slug" id="release_season_slug" value="{{$release['start_season']['season']}}">
+                            <input type="text" name="release_season_slug" id="release_season_slug" value="{{$release['start_season']['season'] ?? 'ЗАПОЛНИ МЕНЯ'}}">
                             <label for="production_studio"></label>
                             <input type="text" name="production_studio" id="production_studio" value="@if(isset($release['studios'][0])) {{$release['studios'][0]['name']}} @endif">
                             <label for="total_episodes"></label>
@@ -151,7 +151,7 @@
                         {{asset('images/no-image.svg')}}
                         @endif">
                             <label for="rating"></label>
-                            <input type="number" name="rating" id="rating" value="{{$release['mean']}}">
+                            <input type="number" name="rating" id="rating" value="{{$release['mean'] ?? 0}}">
                             <label for="status"></label>
                             <input type="text" name="status" id="status" value="{{$release['status']}}">
                             <label for="votes_count"></label>
@@ -160,6 +160,14 @@
                             <input type="text" name="genres" id="genres" value="@foreach($release['genres'] as $key => $genre){{$genre['name']}}@if(!$loop->last),@endif @endforeach">
                             <label for="genre_id"></label>
                             <input type="text" name="genre_id" id="genre_id" value="@foreach($release['genres'] as $key => $genre){{$genre['id']}}@if(!$loop->last),@endif @endforeach">
+                            <input type="text" name="videos_title" id="videos" value="@foreach($release['videos'] as $video_title){{$video_title['title']}}@if(!$loop->last),@endif
+@endforeach">
+                            <input type="text" name="videos_id" id="videos_id" value="@foreach($release['videos'] as $video_title){{$video_title['id']}}@if(!$loop->last),@endif
+@endforeach">
+                            <input type="text" name="videos_poster" id="videos_poster" value="@foreach($release['videos'] as $video_title){{$video_title['thumbnail']}}@if(!$loop->last),@endif
+@endforeach">
+                            <input type="text" name="videos_url" id="videos_url" value="@foreach($release['videos'] as $video_title){{$video_title['url']}}@if(!$loop->last),@endif
+@endforeach">
                             <br>
                             <label for="slug">slug</label>
                             <input type="text" name="slug" id="slug" value="@php echo strtolower(str_replace(' ', '-', str_replace(':', '', str_replace('.', '', str_replace('(', '', str_replace(')', '', $release['title'])))))) @endphp">
@@ -178,11 +186,14 @@
                     id: "player", file: [
                         {
                             "title": "Ненасытный Берсерк 1",
-                            "file": "https://cdn.flowplayer.com/a30bd6bc-f98b-47bc-abf5-97633d4faea0/hls/de3f6ca7-2db3-4689-8160-0f574a5996ad/playlist.m3u8"
+                            "file": "https://cdn.flowplayer.com/a30bd6bc-f98b-47bc-abf5-97633d4faea0/hls/de3f6ca7-2db3-4689-8160-0f574a5996ad/playlist.m3u8",
+                            "poster":"https://i.ytimg.com/vi/QCaEJZqLeTU/mqdefault.jpg",
+
                         },
                         {
                             "title": "Ненасытный Берсерк 2",
-                            "file": "https://cdn.flowplayer.com/a30bd6bc-f98b-47bc-abf5-97633d4faea0/hls/de3f6ca7-2db3-4689-8160-0f574a5996ad/playlist.m3u8"
+                            "file": "https://cdn.flowplayer.com/a30bd6bc-f98b-47bc-abf5-97633d4faea0/hls/de3f6ca7-2db3-4689-8160-0f574a5996ad/playlist.m3u8",
+                            "poster":"https://i.ytimg.com/vi/gY5nDXOtv_o/mqdefault.jpg",
                         }
                     ]
                 });
