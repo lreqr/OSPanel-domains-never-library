@@ -80,6 +80,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/seasonevents', [Admin::class, 'seasonEvents'])->name('admin.seasonEvents')->middleware('auth');
     //Season Events Add or Update
     Route::post('/seasonevents', [Admin::class, 'seasonEventsStore'])->name('admin.seasonEventsStore')->middleware('auth');
+    //Season Events Add or Update
+    Route::get('/users', [Admin::class, 'users'])->name('admin.users')->middleware('auth');
 });
 
 

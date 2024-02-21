@@ -8,6 +8,7 @@ use App\Models\ReleaseComment;
 use App\Models\ReleaseUser;
 use App\Models\SeasonEvent;
 use App\Models\SeasonEventGenre;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\View\View;
@@ -134,5 +135,13 @@ class Admin extends Controller
 
     }
 
+    public function users(): View
+    {
 
+        $users = User::all();
+
+        return \view('admin.users', [
+            'users' => $users,
+        ]);
+    }
 }

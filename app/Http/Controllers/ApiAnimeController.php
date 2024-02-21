@@ -298,6 +298,7 @@ class ApiAnimeController extends Controller
     public
     function fillAnimeInDb(Request $request)
     {
+        dd($request->all());
         $formFields = $request->validate([
             'id' => ['required'],
             'title' => ['required'],
